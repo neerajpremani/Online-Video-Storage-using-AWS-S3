@@ -1,0 +1,76 @@
+<!DOCTYPE html> 
+<html> 
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body> 
+	<h2>MyTube</h2>
+	<input type="text" id="path" placeholder="Enter file path">
+	<input type="text" id="name" placeholder="Enter file name">
+	<button id="submit">Upload</button>
+<iframe  width="425" height="344" id="someFrame" src="https://s3.eu-central-1.amazonaws.com/testabhijeetcoder/videoplayback.mp4" frameborder="0" allowfullscreen></iframe>
+<!-- BUTTon-->
+<div id="buttons">
+<!--	
+<button><a href="https://s3.eu-central-1.amazonaws.com/testabhijeetcoder/vid.mp4">Play Dil</a></button>
+<button><a href="https://s3.eu-central-1.amazonaws.com/testabhijeetcoder/padmavat.mp4">Play Padmavat</a></button>
+-->
+</div>
+<!-- BUTTon-->
+</body> 
+<script type="text/javascript">
+	$(document).ready(function(){
+    $("a").click(function(e) {
+        e.preventDefault();
+        console.log("presedd"+$(this).attr("href"));
+        $("#someFrame").attr("src", $(this).attr("href"));
+    })
+
+
+    
+     $("#buttons").bind('click',function(){
+        var play=event.target.value;
+        var new_link="https://s3.eu-central-1.amazonaws.com/testabhijeetcoder/"+play;
+        $("#someFrame").attr("src",new_link);
+  })
+
+
+    $('#submit').on('click',function(){
+    	var path=$('#path').val();
+    	var name=$('#name').val();
+    	$('#path').val(' ');
+    	$('#name').val(' ');
+    	console.log("path is"+path);
+
+    	//AJAX
+    	 $.ajax({
+            url:"http://localhost:8080/upload",
+            data:{'link':path,'name':name}, //Reference to count_current_record
+            success:function(result){
+                
+            }
+        });
+    	//AJAX
+    });
+
+     $.ajax({
+            url:"http://localhost:8080/list", //Reference to count_current_record
+            success:function(result){
+                
+                var obj=JSON.parse(result);
+                
+                
+                //console.log(obj[0]['val'].split('/')[4])
+                for(var i=0;i<obj.length;i++){
+
+				      var $something= $('<input/>').attr({ type: 'button', value:obj[i]['val'].split('/')[4],id:i});
+					$("#buttons").append($something);
+					
+					
+                }
+                
+            }
+        });
+});
+</script>
+</html>

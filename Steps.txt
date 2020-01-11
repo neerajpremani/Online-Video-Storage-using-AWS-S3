@@ -1,0 +1,18 @@
+Turn on the server
+1.Open cmd
+2.move to the current dir where the cc.js is present
+3. Type 'node cc.js'
+
+Frontend:
+1. Paste the entire file path in the frontend text box
+2. Add different filename in text box to add videos
+
+
+Improvement(frontend.html):
+1. paste bootstrap css,js cdn on title bar
+2. Add bootstrap classes to buttons and
+3. Adjust the orientation
+
+Sample vide0:
+1. Sample video is provided 'pad.mp4'
+2. 
